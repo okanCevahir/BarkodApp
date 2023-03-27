@@ -1,0 +1,13 @@
+Dark Thema            
+#000000
+#150050
+#3F0071
+#610094
+
+
+Light Thema
+#B2A4FF
+#FFB4B4
+#FFDEB4
+#FDF7C3
+
