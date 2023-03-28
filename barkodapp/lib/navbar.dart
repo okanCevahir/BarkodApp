@@ -22,7 +22,9 @@ class _NavbarState extends State<Navbar> {
         ),
       ),
       home: Scaffold(
-        body: Container(),
+        body: Container(
+          child: Page1(),
+        ),
         bottomNavigationBar: MoltenBottomNavigationBar(
           selectedIndex: _selectedIndex,
           barHeight: 70,
