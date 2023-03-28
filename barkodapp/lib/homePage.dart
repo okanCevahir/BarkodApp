@@ -1,3 +1,4 @@
+import 'package:barkodapp/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 
@@ -9,41 +10,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: Theme.of(context).copyWith(
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.deepPurple,
-        ),
-      ),
       home: Scaffold(
-        body: Center(),
-        bottomNavigationBar: MoltenBottomNavigationBar(
-          selectedIndex: _selectedIndex,
-          barHeight: 70,
-          barColor: Color(0XFFFFDEB4),
-          domeHeight: 25,
-          onTabChange: (clickedIndex) {
-            setState(() {
-              _selectedIndex = clickedIndex;
-            });
-          },
-          tabs: [
-            MoltenTab(
-              icon: Icon(Icons.search),
+        appBar: AppBar(
+          backgroundColor: Color(0xFFB2A4FF),
+          title: Text(
+            "BARKOD APP",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
-            MoltenTab(
-              icon: Icon(Icons.camera),
-              title: Text('Kamera'),
+          ),
+          centerTitle: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(60),
             ),
-            MoltenTab(
-              icon: Icon(Icons.person),
-            ),
-          ],
+          ),
+          toolbarHeight: 150,
         ),
+        body: Column(children: [
+          Navbar(),
+        ]),
       ),
     );
   }
