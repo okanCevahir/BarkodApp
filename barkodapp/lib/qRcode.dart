@@ -42,24 +42,21 @@ class _QRViewExampleState extends State<QRViewExample> {
             flex: 1,
             child: Center(
               child: (result != null)
-                  ? Text('Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+                  ? ElevatedButton(
+                      onPressed: () async {
+                        String url = describeEnum(result!.format);
+                        var urllaunchable = await canLaunch(url); //canLaunch is from url_launcher package
+                        if (urllaunchable) {
+                          await launch(url); //launch is from url_launcher package to launch URL
+                        } else {
+                          print("URL can't be launched.");
+                        }
+                      },
+                      child: null,
+                    )
                   : Text('Scan a code'),
             ),
           ),
-          Expanded(
-            child: ElevatedButton(
-              onPressed: () async {
-                String url = describeEnum(result!.format);
-                var urllaunchable = await canLaunch(url); //canLaunch is from url_launcher package
-                if (urllaunchable) {
-                  await launch(url); //launch is from url_launcher package to launch URL
-                } else {
-                  print("URL can't be launched.");
-                }
-              },
-              child: null,
-            ),
-          )
         ],
       ),
     );
@@ -80,3 +77,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     super.dispose();
   }
 }
+
+
+
+//Text('Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')

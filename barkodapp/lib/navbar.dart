@@ -22,9 +22,7 @@ class _NavbarState extends State<Navbar> {
         ),
       ),
       home: Scaffold(
-        body: Container(
-          child: Page1(),
-        ),
+        body: Container(),
         bottomNavigationBar: MoltenBottomNavigationBar(
           selectedIndex: _selectedIndex,
           barHeight: 70,
@@ -50,8 +48,14 @@ class _NavbarState extends State<Navbar> {
               ),
             ),
             MoltenTab(
-              icon: Icon(Icons.camera),
+              
+              icon: Icon(
+                Icons.camera,
+                color: Colors.black,
+                size: 40,
+              ),
               title: Text('Kamera'),
+              
             ),
             MoltenTab(
               icon: Icon(Icons.search),
