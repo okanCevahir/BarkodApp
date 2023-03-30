@@ -40,21 +40,23 @@ class _QRViewExampleState extends State<QRViewExample> {
           ),
           Expanded(
             flex: 1,
-            child: Center(
-              child: (result != null)
-                  ? ElevatedButton(
-                      onPressed: () async {
-                        String url = describeEnum(result!.format);
-                        var urllaunchable = await canLaunch(url); //canLaunch is from url_launcher package
-                        if (urllaunchable) {
-                          await launch(url); //launch is from url_launcher package to launch URL
-                        } else {
-                          print("URL can't be launched.");
-                        }
-                      },
-                      child: null,
-                    )
-                  : Text('Scan a code'),
+            child: Card(
+              color: Colors.blue.shade300,
+              elevation: 12,
+              child: ListTile(
+                onTap: () => (result != null)
+                    ? _launchURLApp()
+                    : showDialog(
+                        context: context,
+                        builder: (BuildContext context) => _buildPopupDialog(context),
+                      ),
+                leading: const Icon(Icons.qr_code_2_sharp),
+                title: const Text("Bağlantıya gitmek için tıklayınız"),
+                subtitle: (result != null)
+                    ? Text('Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+                    : const Text("No code "),
+                trailing: const Icon(Icons.qr_code_scanner_sharp),
+              ),
             ),
           ),
         ],
@@ -76,8 +78,36 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller?.dispose();
     super.dispose();
   }
+
+  _launchURLApp() async {
+    var url = Uri.parse(result!.code.toString()); //result!.code.toString()
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Widget _buildPopupDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('HATA'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const Text("KOD YOK"),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Çıkış'),
+        ),
+      ],
+    );
+  }
 }
 
-
-
-//Text('Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')

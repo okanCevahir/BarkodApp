@@ -16,3 +16,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+navega(context, page) {
+  String actualProgram = page.toString();
+  print(actualProgram);
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return page;
+  }));
+}
+
