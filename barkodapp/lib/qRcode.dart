@@ -50,7 +50,18 @@ class _QRViewExampleState extends State<QRViewExample> {
                         context: context,
                         builder: (BuildContext context) => _buildPopupDialog(context),
                       ),
-                leading: const Icon(Icons.qr_code_2_sharp),
+                leading: Container(
+                  color: Colors.black,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.bookmark_outline_outlined,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      ink
+                    },
+                  ),
+                ),
                 title: const Text("Bağlantıya gitmek için tıklayınız"),
                 subtitle: (result != null)
                     ? Text('Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
@@ -110,4 +121,3 @@ class _QRViewExampleState extends State<QRViewExample> {
     );
   }
 }
-
