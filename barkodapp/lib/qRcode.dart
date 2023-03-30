@@ -12,6 +12,7 @@ class QRViewExample extends StatefulWidget {
 }
 
 class _QRViewExampleState extends State<QRViewExample> {
+  IconData icons = Icons.bookmark_add_outlined;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
@@ -51,14 +52,27 @@ class _QRViewExampleState extends State<QRViewExample> {
                         builder: (BuildContext context) => _buildPopupDialog(context),
                       ),
                 leading: Container(
-                  color: Colors.black,
+                  color: Colors.amber,
                   child: IconButton(
                     icon: Icon(
-                      Icons.bookmark_outline_outlined,
+                      icons,
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      ink
+                      setState(
+                        () {
+                          if (icons == Icons.bookmark_add_outlined) {
+                            icons = Icons.bookmark_add_rounded;
+                          } else {
+                            icons = Icons.bookmark_add_outlined;
+                          }
+
+                          debugPrint("basılsdı");
+                        },
+                      );
+                      if (result != null) {
+                        true;
+                      }
                     },
                   ),
                 ),

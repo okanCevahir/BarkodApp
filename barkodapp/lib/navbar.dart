@@ -1,4 +1,6 @@
 import 'package:barkodapp/homePage.dart';
+import 'package:barkodapp/profilePage.dart';
+import 'package:barkodapp/savePage.dart';
 import 'package:flutter/material.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 import 'package:barkodapp/qRcode.dart';
@@ -38,6 +40,20 @@ class _NavbarState extends State<Navbar> {
                     builder: (context) => QRViewExample(),
                   ),
                 );
+              } else if (clickedIndex == 0) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfilePage(),
+                  ),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SavePage(),
+                  ),
+                );
               }
             });
           },
@@ -48,14 +64,12 @@ class _NavbarState extends State<Navbar> {
               ),
             ),
             MoltenTab(
-              
               icon: Icon(
                 Icons.camera,
                 color: Colors.black,
                 size: 40,
               ),
               title: Text('Kamera'),
-              
             ),
             MoltenTab(
               icon: Icon(Icons.search),
